@@ -1,0 +1,115 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HorizontalCard from "../components/HorizontalCard.astro";
+import ResearchCard from "../components/ResearchCard.astro";
+import { getCollection } from "astro:content";
+import createSlug from "../lib/createSlug"
+
+const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const last_posts = posts.slice(0, 3);
+---
+
+<BaseLayout sideBarActiveItemID="home">
+  <div class="pb-12 mt-5">
+    <div class="text-5xl font-bold">Ethan Lin</div>
+    <div class="text-xl py-1">eyl45@cornell.edu</div>
+    <div class="py-2">
+      <text class="text-lg">
+        I am a 4th year undergraduate student pursuing a double major in Computer Science and Electrical and Computer Engineering at Cornell. 
+        I am extremely fortunate to work with Professor Jennifer J. Sun. I previously worked with Professor Donald Greenberg on
+        virtual reality and 3D modeling projects.
+        <br>
+        <br>
+        I'm broadly interested in research in the areas of graphics, vision, and AI4Science. I have recently
+        been working on improving visual concept learning with VLMs and applying video foundation models for animal behavior 
+        analysis.
+      </text>
+    </div>
+  </div>
+
+  <div>
+    <div class="text-3xl w-full font-bold mb-2">Research</div>
+  </div>
+
+  <ResearchCard
+    title="Beyond Accuracy: Metrics that Uncover what makes a 'Good' Visual Descriptor"
+    img="/fig_concept_main.png"
+    authors="Ethan Lin, Linxi Zhao, Atharva Sehgal, Jennifer J. Sun",
+    venue="VisCon @ CVPR 2025"
+    links={[
+            ["Paper","https://openreview.net/pdf/d4e4323197ac1c3472b6f953f0550ef72842938b.pdf"],
+            ["Project Page", "https://ethan-y-lin.github.io/beyond-accuracy-project-page/"],
+            ["Github", "https://github.com/ethan-y-lin/beyond_accuracy"],
+            ["arXiv (coming soon)", ""]
+          ]}
+  />
+  <div class="divider my-0"></div>
+  <ResearchCard
+    title="Fish Video Dataset",
+    img="/fish_and_coral.png"
+    authors=""
+    venue="In submission..."
+    links={[]}
+  />
+<div>
+  <div class="text-3xl w-full font-bold mb-6 mt-10">Teaching Experience</div>
+
+  <div class="border-l-4 border-primary pl-6 space-y-5">
+    <div>
+      <h3 class="text-lg font-semibold">CS 4620: Introduction to Computer Graphics</h3>
+      <p class="text-sm text-gray-600">TA Fall 2025</p>
+    </div>
+
+    <div>
+      <h3 class="text-lg font-semibold">CS 3780: Introduction to Machine Learning</h3>
+      <p class="text-sm text-gray-600">TA Fall 2024 & Spring 2025 </p>
+    </div>
+
+    <div>
+      <h3 class="text-lg font-semibold">CS 1620: Visual Imaging in the Electronic Age</h3>
+      <p class="text-sm text-gray-600">TA Fall 2024</p>
+    </div>
+
+    <div>
+      <h3 class="text-lg font-semibold">CS 2110: Object Oriented Programming and Data Structures</h3>
+      <p class="text-sm text-gray-600">Course Consultant Spring 2024</p>
+    </div>
+  </div>
+</div>
+
+
+
+  <div>
+    <div class="text-3xl w-full font-bold mb-5 mt-10">Projects</div>
+  </div>
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Softbody Physics Simulator"
+    video="/softbody_demo_video.mp4"
+    desc="This project models softbody interactions using particle-spring systems. This was the 1st place project for Cornell's Graphics course (CS4620)."
+    url={""}
+    target="_self"
+    badge=""
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Taichi Pathtracer"
+    video="/pathtracer_diamond.mov"
+    desc="This project implements an efficient pathtracer in Taichi that renders a diamond. The pathtracer supports \
+          refraction, fresnel reflection, normal mapping, texture mapping, etc."
+    url={""}
+    target="_self"
+    badge=""
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Infinite Zelda"
+    video="/sunlight.mov"
+    desc="This project uses rasterization to render a mini game that is inspired by Zelda. \
+     Customized shaders are created to simulate grass, trees, terrain, etc."
+    url={""}
+    target="_self"
+    badge=""
+  />
+</BaseLayout>
