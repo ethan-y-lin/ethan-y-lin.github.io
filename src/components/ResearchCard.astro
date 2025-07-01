@@ -26,8 +26,9 @@ import { Image } from "astro:assets";
           {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
         </h1>
 
-        {authors && <p class="text-sm py-1 text-gray-400 italic">{authors}</p>}
-        {venue && <p class="text-sm py-1 text-gray-500">{venue}</p>}
+        {authors && <p class="text-sm py-1 text-gray-400 italic" set:html={authors} />}
+        {venue && <p class="text-sm py-1 text-gray-500" set:html={venue} />}
+        
 
         <p class="py-1 text-1xl">{desc}</p>
 
