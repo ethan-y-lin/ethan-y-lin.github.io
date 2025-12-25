@@ -16,7 +16,7 @@ const last_posts = posts.slice(0, 3);
     <div class="text-xl py-1">eyl45@cornell.edu</div>
     <div class="py-2">
       <text class="text-lg">
-        I am a 4th year undergraduate student pursuing a double major in Computer Science and Electrical and Computer Engineering at Cornell. 
+        I am a 4th year undergraduate student pursuing a major in Computer Science and minor in Electrical and Computer Engineering at Cornell. 
         I am extremely fortunate to work with Professor Jennifer J. Sun. Previously, I worked with Professor Donald Greenberg on
         virtual reality and 3D modeling projects.
         <br>
@@ -33,6 +33,29 @@ const last_posts = posts.slice(0, 3);
   </div>
 
   <ResearchCard
+    title="Simple Agents Outperform Experts in Biomedical Imaging Workflow Optimization"
+    img="/sciseek.png"
+    authors="Xuefei Wang, Kai A. Horstmann, <b>Ethan Lin</b>, Jonathan Chen, Alexander R. Farhang, Sophia Stiles, Atharva Sehgal, Jonathan Light, David Van Valen, Yisong Yue, Jennifer J. Sun",
+    venue="In submission...",
+    links={[
+            ["Paper","https://www.arxiv.org/pdf/2512.06006"],
+            ["Project Page", "https://sites.google.com/view/simple-agent-opt/home"],
+            ["Code", "https://github.com/xuefei-wang/simple-agent-opt"],
+            ["arXiv", "https://arxiv.org/abs/2512.06006"]
+          ]}
+  />
+  <div class="divider my-0"></div>
+  <ResearchCard
+    title="WildFin: An In-the-Wild Video Dataset from Underwater Ecology Pipelines",
+    img="/wildfin.png"
+    authors="Abigail Grassick, Jerome Tze-Hou Hsu, <b>Ethan Lin</b>, Max Whitton, Madelyn Hair, Liam Gutierrez, Haozheng Yu, Kristin Branson, Vivek Jayaraman, Michael A. Gil, Andrew M. Hein, Jennifer J. Sun",
+    venue="In submission...",
+    links={[
+            ["Coming Soon!","https://ethan-y-lin.github.io"]
+          ]}
+  />
+  <div class="divider my-0"></div>
+  <ResearchCard
     title="Beyond Accuracy: Metrics that Uncover what makes a 'Good' Visual Descriptor"
     img="/fig_concept_main.png"
     authors="<b>Ethan Lin*</b>, Linxi Zhao, Atharva Sehgal, Jennifer J. Sun",
@@ -44,18 +67,14 @@ const last_posts = posts.slice(0, 3);
             ["arXiv", "https://arxiv.org/abs/2507.03542"]
           ]}
   />
-  <div class="divider my-0"></div>
-  <ResearchCard
-    title="Fish Video Dataset",
-    img="/fish_and_coral.png"
-    authors=""
-    venue="In submission..."
-    links={[]}
-  />
 <div>
   <div class="text-3xl w-full font-bold mb-6 mt-10">Teaching Experience</div>
 
   <div class="border-l-4 border-primary pl-6 space-y-5">
+    <div>
+      <h3 class="text-lg font-semibold">CS 4782: Introduction to Deep Learning</h3>
+      <p class="text-sm text-gray-600">TA Spring 2025</p>
+    </div>
     <div>
       <h3 class="text-lg font-semibold">CS 4620: Introduction to Computer Graphics</h3>
       <p class="text-sm text-gray-600">TA Fall 2025</p>
@@ -77,8 +96,6 @@ const last_posts = posts.slice(0, 3);
     </div>
   </div>
 </div>
-
-
 
   <div>
     <div class="text-3xl w-full font-bold mb-5 mt-10">Projects</div>
@@ -113,4 +130,23 @@ const last_posts = posts.slice(0, 3);
     target="_self"
     badge=""
   />
+
+<div>
+  <div class="text-3xl w-full font-bold mb-6 mt-10">Awards</div>
+
+  <div class="border-l-4 border-primary pl-6 space-y-5">
+    <div>
+      <h3 class="text-lg font-semibold">CRA Outstanding Undergraduate Researcher Award Honorable Mention 2025-2026 </h3>
+    </div>
+    <div>
+      <h3 class="text-lg font-semibold">Best Poster Award - Visual Concepts Workshop CVPR 2025</h3>
+    </div>
+
+    <div>
+      <h3 class="text-lg font-semibold">Dean's List All Semesters</h3>
+    </div>
+  </div>
+</div>
+
+
 </BaseLayout>
