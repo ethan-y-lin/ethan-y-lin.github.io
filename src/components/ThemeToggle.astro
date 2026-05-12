@@ -1,0 +1,42 @@
+<button
+  id="theme-toggle"
+  type="button"
+  class="rounded-full border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-800 transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-200 dark:hover:bg-neutral-900"
+  aria-label="Toggle light and dark mode"
+>
+  <span id="theme-toggle-icon">☀️</span>
+</button>
+
+<script is:inline>
+  const button = document.getElementById("theme-toggle");
+  const icon = document.getElementById("theme-toggle-icon");
+
+  function getPreferredTheme() {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme) return storedTheme;
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("theme", theme);
+
+    if (icon) {
+      icon.textContent = theme === "dark" ? "🌙" : "☀️";
+    }
+
+    if (button) {
+      button.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+    }
+  }
+
+  applyTheme(getPreferredTheme());
+
+  button?.addEventListener("click", () => {
+    const isDark = document.documentElement.classList.contains("dark");
+    applyTheme(isDark ? "light" : "dark");
+  });
+</script>

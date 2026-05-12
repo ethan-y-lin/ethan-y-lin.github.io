@@ -1,0 +1,110 @@
+---
+type NewsItem = {
+  date: string;
+  text: string;
+  href?: string;
+};
+
+type Props = {
+  items: NewsItem[];
+  initialCount?: number;
+};
+
+const { items, initialCount = 4 } = Astro.props;
+const hasHiddenItems = items.length > initialCount;
+---
+
+<section class="space-y-4">
+  <div class="flex items-end justify-between gap-4">
+    <h2 class="text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+      News
+    </h2>
+  </div>
+
+  <div class="overflow-hidden rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950">
+    <div id="news-list">
+      {items.map((item, index) => {
+        const isInitiallyVisible = index < initialCount;
+        const isLast = index === items.length - 1;
+
+        return (
+          <div
+            class:list={[
+              "overflow-hidden transition-all duration-300 ease-out",
+              isInitiallyVisible
+                ? "max-h-[220px] translate-y-0 opacity-100"
+                : "max-h-0 -translate-y-2 opacity-0 pointer-events-none",
+            ]}
+            data-news-item
+            data-visible={isInitiallyVisible ? "true" : "false"}
+          >
+            <div
+              class:list={[
+                "grid gap-2 p-4 text-sm md:grid-cols-[110px_1fr]",
+                !isLast && "border-b border-neutral-200 dark:border-neutral-800",
+              ]}
+            >
+              <time class="text-neutral-500">{item.date}</time>
+
+              <p class="text-neutral-700 dark:text-neutral-300">
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    class="underline underline-offset-4 hover:text-neutral-950 dark:hover:text-white"
+                  >
+                    {item.text}
+                  </a>
+                ) : (
+                  item.text
+                )}
+              </p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    {hasHiddenItems && (
+      <div class="border-t border-neutral-200 p-4 dark:border-neutral-800">
+        <button
+          id="news-toggle"
+          type="button"
+          class="text-sm font-medium text-neutral-700 underline underline-offset-4 transition hover:text-neutral-950 dark:text-neutral-300 dark:hover:text-white"
+          aria-expanded="false"
+          aria-controls="news-list"
+        >
+          Show older news
+        </button>
+      </div>
+    )}
+  </div>
+</section>
+
+<script>
+  const button = document.getElementById("news-toggle");
+  const newsItems = document.querySelectorAll("[data-news-item]");
+
+  let expanded = false;
+
+  button?.addEventListener("click", () => {
+    expanded = !expanded;
+
+    newsItems.forEach((item) => {
+      const isInitiallyVisible = item.getAttribute("data-visible") === "true";
+
+      if (isInitiallyVisible) return;
+
+      item.classList.toggle("max-h-0", !expanded);
+      item.classList.toggle("-translate-y-2", !expanded);
+      item.classList.toggle("opacity-0", !expanded);
+      item.classList.toggle("pointer-events-none", !expanded);
+
+      item.classList.toggle("max-h-[220px]", expanded);
+      item.classList.toggle("translate-y-0", expanded);
+      item.classList.toggle("opacity-100", expanded);
+    });
+
+    button.textContent = expanded ? "Hide older news" : "Show older news";
+    button.setAttribute("aria-expanded", String(expanded));
+  });
+</script>

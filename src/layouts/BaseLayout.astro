@@ -1,0 +1,29 @@
+---
+import "../styles/global.css";
+
+const { title = "Ethan Lin" } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <script is:inline>
+      const theme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    
+      if (theme === "dark" || (!theme && prefersDark)) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+
+  <body class="bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-neutral-100">
+    <main class="mx-auto max-w-5xl px-6 py-10">
+      <slot />
+    </main>
+  </body>
+</html>

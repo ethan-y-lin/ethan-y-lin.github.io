@@ -1,17 +1,294 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeaderCard from "../components/HeaderCard.astro";
+import NewsList from "../components/NewsList.astro";
+import ResearchCard from "../components/ResearchCard.astro";
+import TeachingItem from "../components/TeachingItem.astro";
+import AwardsSection from "../components/AwardsSection.astro";
+const news = [
+ {
+    date: "Sep 2026",
+    text: "Starting PhD at Caltech.",
+  },
+  {
+    date: "Jun 2026",
+    text: "Working with Sara Beery at MIT for the summer.",
+  },
+  {
+    date: "Jun 2026",
+    text: "Will be presenting Simple Agents at CVPR.",
+  },
+  {
+    date: "May 2026",
+    text: "Graduated from Cornell University.",
+  },
+  {
+    date: "Mar 2026",
+    text: "Accepted to 4 PhD programs! (Caltech, MIT, UPenn, Cornell)",
+  },
+  {
+    date: "Jun 2025",
+    text: "Attended CVPR. ",
+  },
+];
 
+const publications = [
+  {
+    title: "AgentSSL: Can MLE Agents Leverage Unlabeled Data?",
+	selected: true,
+	description:"",
+	authors: ["A. Sarkar*", "E. Lin*", "Z. Liu", "K. Branson", "J. J. Sun"],
+    venue: "In Submission to NeurIPS",
+    year: "2026",
+    links: [
+      { label: "Coming Soon!", href: "#" }
+    ],
+  },
+  {
+    title: "A case study of evaluating AI agents on a neuroscience data-to-discovery pipeline",
+	description:"",
+	selected: false,
+	authors: ["K. A. Horstmann", "E. Lin", "A. A. Robie", "J. J. Sun", "K. Branson"],
+    venue: "In Submission to COLM",
+    year: "2026",
+    links: [
+      { label: "Coming Soon!", href: "#" }
+    ],
+  },
+  {
+    title: "WildFin: An In-the-Wild Video Dataset from Underwater Ecology Pipelines",
+	description:"",
+	selected: false,
+	authors: ["A. Grassick", "J. T. Hsu", "E. Lin", "Z. Liu", "M. Whitton", "M. Hair", "L. Gutierrez", "H. Yu", "K. Branson", 
+	"V. Jayaraman", "M. A. Gil", "A. M. Hein", "J. J. Sun"],
+    venue: "In Submission to ECCV",
+    year: "2026",
+    links: [
+      { label: "Coming Soon!", href: "#" }
+    ],
+  },
+  {
+    title: "Simple Agents Outperform Experts in Biomedical Imaging Workflow Optimization",
+	description:"",
+	selected: true, 
+    authors: ["X. Wang", "K. A. Horstmann", "E. Lin", "J. Chen", 
+	"A. R. Farhang", "S. Stiles", "A. Sehgal", "J. Light", "D. Van Valen", "Y. Yue", "J. J. Sun"],
+    venue: "CVPR",
+    year: "2026",
+    links: [{ label: "Paper", href: "https://arxiv.org/abs/2512.06006" },
+			{ label: "Project Page", href: "https://sites.google.com/view/simple-agent-opt/home" },
+			{ label: "Code", href: "https://github.com/xuefei-wang/simple-agent-opt" },
+		   ],
+  },
+  {
+    title: "Beyond Accuracy: Metrics that Uncover what Makes a 'Good' Visual Descriptor",
+	selected: true,
+	awards: ["Best Poster Award"],
+	description:"",
+    authors: ["E. Lin", "L. Zhao", "A. Sehgal", "J. J. Sun"],
+    venue: "VisCon @ CVPR",
+    year: "2025",
+    links: [{ label: "Paper", href: "https://arxiv.org/abs/2507.03542" },
+			{ label: "Project Page", href: "https://ethan-y-lin.github.io/beyond-accuracy-project-page/" },
+			{ label: "Code", href: "https://github.com/ethan-y-lin/beyond-accuracy" },
+		   ],
+  },
+];
+
+const projects = [
+  {
+    title: "AgentSSL",
+    description:
+      "An agentic framework for discovering semi-supervised learning strategies under limited labeled data.",
+    href: "#",
+    tags: ["Agents", "SSL", "Research"],
+    year: "2026",
+    status: "Research",
+  },
+  {
+    title: "WildFin Detection",
+    description:
+      "Object detection experiments for ecological monitoring under severe label scarcity.",
+    href: "#",
+    tags: ["Detection", "Ecology"],
+    year: "2026",
+    status: "Applied ML",
+  },
+];
+
+const teachings = [
+  {
+    course: "CS 4782: Introduction to Deep Learning",
+	role: "Teaching Assistant",
+	institution: "Cornell University",
+	date: "SP 2026",
+  },
+  {
+	course: "CS 4620: Introduction to Computer Graphics",
+	role: "Teaching Assistant",
+	institution: "Cornell University",
+	date: "FA 2026",
+  },
+  {
+	course: "CS 3780: Introduction to Machine Learning",
+	role: "Teaching Assistant",
+	institution: "Cornell University",
+	date: "FA 2024, SP 2025",
+  },
+  {
+	course: "CS 2110: Object-Oriented Programming and Data Structures",
+	role: "Teaching Assistant",
+	institution: "Cornell University",
+	date: "SP 2024",
+  },
+];
+
+const awards = [
+  {
+	title: "CRA Outstanding Undergraduate Researcher Award Honorable Mention",
+	year: "2025-2026",
+  },
+  {
+	title: "Best Poster Award - VisCon @ CVPR",
+	year: "2025",
+  },
+  {
+	title: "Cornell Dean's List",
+	year: "All Semesters",
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Ethan Lin">
+  <div class="space-y-14">
+    <HeaderCard
+      name="Ethan Lin"
+      title="Incoming CMS PhD Student at Caltech"
+      affiliation=""
+      location=""
+      photo="/images/bio_photo.png"
+      interests={[
+      ]}
+      links={[
+        { label: "Email", href: "mailto:eyl45@cornell.edu" },
+        { label: "GitHub", href: "https://github.com/ethan-y-lin" },
+        { label: "Google Scholar", href: "https://scholar.google.com/citations?user=cpF0bJUAAAAJ&hl=en" },
+        { label: "CV", href: "/files/CV.pdf" },
+      ]}
+    >
+    <p class="max-w-3xl text-sm leading-7 text-neutral-600 dark:text-neutral-300">
+		I am an incoming CMS PhD student at Caltech, where I will be working with
+		<a
+		  href="https://www.yisongyue.com/"
+		  class="font-medium text-amber-700 underline underline-offset-4 hover:text-amber-800 dark:text-amber-300 dark:hover:text-amber-200"
+		  target="_blank"
+		  rel="noreferrer"
+		>
+		  Yisong Yue
+		</a>.
+		I am completing my undergraduate degree in Computer Science at Cornell University,
+		where I was fortunate to be advised by
+		<a
+		  href="https://jenjsun.com/"
+		  class="font-medium text-amber-700 underline underline-offset-4 hover:text-amber-800 dark:text-amber-300 dark:hover:text-amber-200"
+		  target="_blank"
+		  rel="noreferrer"
+		>
+		  Jennifer J. Sun
+		</a>.
+		I'm broadly interested in AI for scientific discovery, currently focused on
+		leveraging agents for automating bottlenecks in scientific analysis pipelines.
+	  </p>
+	</HeaderCard>
+    <NewsList items={news} />
+
+	<section class="space-y-5">
+		<div class="flex items-end justify-between gap-4">
+		  <div>
+			<h2 class="text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+			  Publications
+			</h2>
+			<p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+			  Selected papers and ongoing research.
+			</p>
+		  </div>
+	  
+		  {publications.some((pub) => !pub.selected) && (
+			<button
+			  id="publications-toggle"
+			  type="button"
+			  class="shrink-0 text-sm font-medium text-neutral-600 underline underline-offset-4 transition hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
+			  aria-expanded="false"
+			  aria-controls="publications-list"
+			>
+			  Show all publications
+			</button>
+		  )}
+		</div>
+	  
+		<div id="publications-list">
+			{publications.map((pub) => (
+			  <div
+				class:list={[
+				  "overflow-hidden transition-all duration-500 ease-in-out",
+				  pub.selected
+					? "mb-5 max-h-[1000px] translate-y-0 opacity-100"
+					: "mb-0 max-h-0 -translate-y-2 opacity-0 pointer-events-none",
+				]}
+				data-publication
+				data-selected={pub.selected ? "true" : "false"}
+			  >
+				<ResearchCard {...pub} />
+			  </div>
+			))}
+		  </div>
+	</section>
+	  
+	<script>
+		const button = document.getElementById("publications-toggle");
+		const publicationItems = document.querySelectorAll("[data-publication]");
+	  
+		let expanded = false;
+	  
+		button?.addEventListener("click", () => {
+		  expanded = !expanded;
+	  
+		  publicationItems.forEach((item) => {
+			const isSelected = item.getAttribute("data-selected") === "true";
+			if (isSelected) return;
+	  
+			item.classList.toggle("mb-0", !expanded);
+			item.classList.toggle("max-h-0", !expanded);
+			item.classList.toggle("-translate-y-2", !expanded);
+			item.classList.toggle("opacity-0", !expanded);
+			item.classList.toggle("pointer-events-none", !expanded);
+	  
+			item.classList.toggle("mb-5", expanded);
+			item.classList.toggle("max-h-[1000px]", expanded);
+			item.classList.toggle("translate-y-0", expanded);
+			item.classList.toggle("opacity-100", expanded);
+		  });
+	  
+		  button.textContent = expanded
+			? "Show selected publications"
+			: "Show all publications";
+	  
+		  button.setAttribute("aria-expanded", String(expanded));
+		});
+	  </script>
+
+    <section class="space-y-5">
+      <div>
+        <h2 class="text-2xl font-semibold tracking-tight">Teaching</h2>
+      </div>
+
+      <div class="space-y-4">
+        {teachings.map((teaching) => (
+          <TeachingItem {...teaching} />
+        ))}
+      </div>
+    </section>
+
+    <AwardsSection awards={awards} />
+  </div>
+</BaseLayout>
