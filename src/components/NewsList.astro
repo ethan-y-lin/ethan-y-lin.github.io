@@ -10,7 +10,7 @@ type Props = {
   initialCount?: number;
 };
 
-const { items, initialCount = 4 } = Astro.props;
+const { items, initialCount = 3 } = Astro.props;
 const hasHiddenItems = items.length > initialCount;
 ---
 
