@@ -4,8 +4,6 @@ type Link = {
   href: string;
 };
 
-type Theme = "green" | "blue" | "purple" | "amber" | "neutral";
-
 type Props = {
   title: string;
   description: string;
@@ -17,8 +15,6 @@ type Props = {
   imageAlt?: string;
   tags?: string[];
   links?: Link[];
-  highlighted?: boolean;
-  theme?: Theme;
 };
 
 const {
@@ -32,54 +28,10 @@ const {
   imageAlt = "",
   tags = [],
   links = [],
-  highlighted = false,
-  theme = "amber",
 } = Astro.props;
-
-const themeClasses = {
-  green: {
-    venue:
-      "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-900/70 dark:bg-emerald-950/40 dark:text-emerald-300",
-    link:
-      "border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 dark:border-emerald-900/70 dark:bg-emerald-950/40 dark:text-emerald-300 dark:hover:bg-emerald-900/50",
-  },
-  blue: {
-    venue:
-      "border-sky-200 bg-sky-50 text-sky-700 dark:border-sky-900/70 dark:bg-sky-950/40 dark:text-sky-300",
-    link:
-      "border-sky-200 bg-sky-50 text-sky-700 hover:bg-sky-100 dark:border-sky-900/70 dark:bg-sky-950/40 dark:text-sky-300 dark:hover:bg-sky-900/50",
-  },
-  purple: {
-    venue:
-      "border-violet-200 bg-violet-50 text-violet-700 dark:border-violet-900/70 dark:bg-violet-950/40 dark:text-violet-300",
-    link:
-      "border-violet-200 bg-violet-50 text-violet-700 hover:bg-violet-100 dark:border-violet-900/70 dark:bg-violet-950/40 dark:text-violet-300 dark:hover:bg-violet-900/50",
-  },
-  amber: {
-    venue:
-      "border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-900/70 dark:bg-amber-950/40 dark:text-amber-300",
-    link:
-      "border-amber-200 bg-amber-50 text-amber-700 hover:bg-amber-100 dark:border-amber-900/70 dark:bg-amber-950/40 dark:text-amber-300 dark:hover:bg-amber-900/50",
-  },
-  neutral: {
-    venue:
-      "border-neutral-200 bg-neutral-100 text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300",
-    link:
-      "border-neutral-200 bg-neutral-100 text-neutral-700 hover:bg-neutral-200 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800",
-  },
-};
-
-const currentTheme = themeClasses[theme];
 ---
 
-<article
-  class:list={[
-    "group overflow-hidden rounded-2xl border bg-white transition dark:bg-neutral-950",
-    highlighted
-      ? "border-emerald-300 shadow-lg shadow-neutral-900/10 dark:border-emerald-800/80 dark:shadow-neutral-950/40"
-      : "border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50/90 dark:border-neutral-800 dark:hover:border-neutral-600 dark:hover:bg-neutral-900/70",
-  ]}
->
+<article class="research-card group overflow-hidden transition">
   <div
     class:list={[
       image ? "grid gap-0 md:grid-cols-[220px_1fr]" : "block",
@@ -98,14 +50,13 @@ const currentTheme = themeClasses[theme];
       )
     }
 
-    <div class="space-y-4 p-5">
-      <div class="space-y-3">
+    <div class="space-y-2.5 py-3.5">
+      <div class="space-y-2">
         <div class="flex flex-wrap items-center gap-2 text-xs">
           {venue && (
             <span
               class:list={[
-                "inline-flex items-center rounded-full border px-2.5 py-1 font-medium",
-                currentTheme.venue,
+                "research-venue",
               ]}
             >
               {venue}
@@ -130,7 +81,7 @@ const currentTheme = themeClasses[theme];
         )}
         </div>
 
-        <h2 class="text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+        <h2 class="research-title">
           {title}
         </h2>
 
@@ -172,14 +123,11 @@ const currentTheme = themeClasses[theme];
 
       {
         links.length > 0 && (
-          <div class="flex flex-wrap gap-2 pt-1 text-sm">
+          <div class="flex flex-wrap gap-2 text-sm">
             {links.map((link) => (
               <a
                 href={link.href}
-                class:list={[
-                  "inline-flex items-center rounded-full border px-3 py-1.5 font-medium transition",
-                  currentTheme.link,
-                ]}
+                class="research-link"
                 target={link.href.startsWith("http") ? "_blank" : undefined}
                 rel={link.href.startsWith("http") ? "noreferrer" : undefined}
               >

@@ -6,17 +6,21 @@ import ResearchCard from "../components/ResearchCard.astro";
 import TeachingItem from "../components/TeachingItem.astro";
 import AwardsSection from "../components/AwardsSection.astro";
 const news = [
- {
-    date: "Sep 2026",
-    text: "Starting PhD at Caltech.",
-  },
-//   {
-//     date: "Jun 2026",
-//     text: "Working with Sara Beery at MIT for the summer.",
+//  {
+//     date: "Sep 2026",
+//     text: "Starting PhD at Caltech.",
 //   },
+	{
+	date: "Jun 2026",
+	text: "Joined the BeeryLab at MIT as a visiting researcher.",
+	linkText: "BeeryLab",
+	href: "https://beerylab.csail.mit.edu/",
+	},
   {
     date: "Jun 2026",
-    text: "Will be presenting Simple Agents at CVPR.",
+    text: "Presenting Simple Agents at CVPR 2026.",
+    linkText: "Simple Agents",
+    href: "https://arxiv.org/abs/2512.06006",
   },
   {
     date: "May 2026",
@@ -28,7 +32,7 @@ const news = [
   },
   {
     date: "Jun 2025",
-    text: "Attended CVPR. ",
+    text: "Won Best Poster Award at the Visual Concepts Workshop @ CVPR 2025! ",
   },
 ];
 
@@ -49,10 +53,10 @@ const publications = [
 	description:"",
 	selected: false,
 	authors: ["K. A. Horstmann", "E. Lin", "A. A. Robie", "J. J. Sun", "K. Branson"],
-    venue: "In Submission to COLM",
+    venue: "COLM",
     year: "2026",
     links: [
-      { label: "Coming Soon!", href: "#" }
+      { label: "Paper", href: "https://arxiv.org/abs/2606.07718" }
     ],
   },
   {
@@ -61,7 +65,7 @@ const publications = [
 	selected: false,
 	authors: ["A. Grassick", "J. T. Hsu", "E. Lin", "Z. Liu", "M. Whitton", "M. Hair", "L. Gutierrez", "H. Yu", "K. Branson", 
 	"V. Jayaraman", "M. A. Gil", "A. M. Hein", "J. J. Sun"],
-    venue: "In Submission to ECCV",
+    venue: "In Submission to ECCV Workshop",
     year: "2026",
     links: [
       { label: "Coming Soon!", href: "#" }
@@ -92,27 +96,6 @@ const publications = [
 			{ label: "Project Page", href: "https://ethan-y-lin.github.io/beyond-accuracy-project-page/" },
 			{ label: "Code", href: "https://github.com/ethan-y-lin/beyond-accuracy" },
 		   ],
-  },
-];
-
-const projects = [
-  {
-    title: "AgentSSL",
-    description:
-      "An agentic framework for discovering semi-supervised learning strategies under limited labeled data.",
-    href: "#",
-    tags: ["Agents", "SSL", "Research"],
-    year: "2026",
-    status: "Research",
-  },
-  {
-    title: "WildFin Detection",
-    description:
-      "Object detection experiments for ecological monitoring under severe label scarcity.",
-    href: "#",
-    tags: ["Detection", "Ecology"],
-    year: "2026",
-    status: "Applied ML",
   },
 ];
 
@@ -149,7 +132,7 @@ const awards = [
 	year: "2025-2026",
   },
   {
-	title: "Best Poster Award - VisCon @ CVPR",
+	title: "Best Poster Award at Visual Concepts Workshop @ CVPR 2025",
 	year: "2025",
   },
   {
@@ -160,7 +143,7 @@ const awards = [
 ---
 
 <BaseLayout title="Ethan Lin">
-  <div class="space-y-14">
+  <div class="page-content">
     <HeaderCard
       name="Ethan Lin"
       title="Incoming CMS PhD Student at Caltech"
@@ -176,39 +159,39 @@ const awards = [
         { label: "CV", href: "/files/CV.pdf" },
       ]}
     >
-    <p class="max-w-3xl text-sm leading-7 text-neutral-600 dark:text-neutral-300">
-		I am an incoming CMS PhD student at Caltech, where I will be working with
+    <p class="profile-bio">
+		I am an incoming CMS PhD student at Caltech advised by
 		<a
 		  href="https://www.yisongyue.com/"
-		  class="font-medium text-amber-700 underline underline-offset-4 hover:text-amber-800 dark:text-amber-300 dark:hover:text-amber-200"
+		  class="profile-bio-link"
 		  target="_blank"
 		  rel="noreferrer"
 		>
 		  Yisong Yue
-		</a>.
-		I am completing my undergraduate degree in Computer Science at Cornell University,
+		</a>. I'm broadly interested in AI for scientific discovery, currently focused on
+		leveraging agents for automating bottlenecks in scientific analysis pipelines.
+		Previously, I received my B.S. in Computer Science at Cornell University,
 		where I was fortunate to be advised by
 		<a
 		  href="https://jenjsun.com/"
-		  class="font-medium text-amber-700 underline underline-offset-4 hover:text-amber-800 dark:text-amber-300 dark:hover:text-amber-200"
+		  class="profile-bio-link"
 		  target="_blank"
 		  rel="noreferrer"
 		>
 		  Jennifer J. Sun
 		</a>.
-		I'm broadly interested in AI for scientific discovery, currently focused on
-		leveraging agents for automating bottlenecks in scientific analysis pipelines.
+
 	  </p>
 	</HeaderCard>
     <NewsList items={news} />
 
-	<section class="space-y-5">
-		<div class="flex items-end justify-between gap-4">
+	<section class="content-section publications-section">
+		<div class="section-header split-header">
 		  <div>
-			<h2 class="text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+			<h2 class="section-title">
 			  Publications
 			</h2>
-			<p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+			<p class="section-description">
 			  Selected papers and ongoing research.
 			</p>
 		  </div>
@@ -217,7 +200,7 @@ const awards = [
 			<button
 			  id="publications-toggle"
 			  type="button"
-			  class="shrink-0 text-sm font-medium text-neutral-600 underline underline-offset-4 transition hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
+			  class="section-toggle"
 			  aria-expanded="false"
 			  aria-controls="publications-list"
 			>
@@ -232,7 +215,7 @@ const awards = [
 				class:list={[
 				  "overflow-hidden transition-all duration-500 ease-in-out",
 				  pub.selected
-					? "mb-5 max-h-[1000px] translate-y-0 opacity-100"
+					? "mb-2 max-h-[1000px] translate-y-0 opacity-100"
 					: "mb-0 max-h-0 -translate-y-2 opacity-0 pointer-events-none",
 				]}
 				data-publication
@@ -263,7 +246,7 @@ const awards = [
 			item.classList.toggle("opacity-0", !expanded);
 			item.classList.toggle("pointer-events-none", !expanded);
 	  
-			item.classList.toggle("mb-5", expanded);
+			item.classList.toggle("mb-2", expanded);
 			item.classList.toggle("max-h-[1000px]", expanded);
 			item.classList.toggle("translate-y-0", expanded);
 			item.classList.toggle("opacity-100", expanded);
@@ -277,12 +260,12 @@ const awards = [
 		});
 	  </script>
 
-    <section class="space-y-5">
+    <section class="content-section">
       <div>
-        <h2 class="text-2xl font-semibold tracking-tight">Teaching</h2>
+        <h2 class="section-title">Teaching</h2>
       </div>
 
-      <div class="space-y-4">
+      <div class="section-list">
         {teachings.map((teaching) => (
           <TeachingItem {...teaching} />
         ))}

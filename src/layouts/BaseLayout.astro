@@ -21,9 +21,10 @@ const { title = "Ethan Lin" } = Astro.props;
     <title>{title}</title>
   </head>
 
-  <body class="bg-white text-neutral-950 transition-colors dark:bg-neutral-950 dark:text-neutral-100">
-    <main class="mx-auto max-w-5xl px-6 py-10">
+  <body class="transition-colors">
+    <main class="site-main">
       <slot />
     </main>
+    <footer class="site-footer">@ 2026 Ethan Lin</footer>
   </body>
 </html>
