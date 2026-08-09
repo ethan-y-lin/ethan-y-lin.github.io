@@ -27,12 +27,10 @@ const news = [
     text: "Graduated from Cornell University.",
   },
   {
-    date: "Mar 2026",
-    text: "Accepted to 4 PhD programs! (Caltech, MIT, UPenn, Cornell)",
-  },
-  {
     date: "Jun 2025",
     text: "Won Best Poster Award at the Visual Concepts Workshop @ CVPR 2025! ",
+	linkText: "Visual Concepts Workshop @ CVPR 2025",
+	href: "https://sites.google.com/stanford.edu/visual-concepts-workshops/cvpr25",
   },
 ];
 
@@ -41,9 +39,11 @@ const publications = [
     title: "AgentSSL: Can MLE Agents Leverage Unlabeled Data?",
 	selected: true,
 	description:"",
-	authors: ["A. Sarkar*", "E. Lin*", "Z. Liu", "K. Branson", "J. J. Sun"],
-    venue: "In Submission to NeurIPS",
+	authors: ["E. Lin*", "A. Sarkar*", "Z. Liu", "K. Branson", "J. J. Sun"],
+    venue: "LM4Sci @ COLM + In Submission to NeurIPS",
     year: "2026",
+	image: "/images/publication-figures/agentssl.png",
+	imageAlt: "AgentSSL Figure 1",
     links: [
       { label: "Coming Soon!", href: "#" }
     ],
@@ -53,6 +53,8 @@ const publications = [
 	description:"",
 	selected: false,
 	authors: ["K. A. Horstmann", "E. Lin", "A. A. Robie", "J. J. Sun", "K. Branson"],
+	image: "/images/publication-figures/fly_opt.png",
+	imageAlt: "FlyOpt Figure 1",
     venue: "COLM",
     year: "2026",
     links: [
@@ -62,10 +64,13 @@ const publications = [
   {
     title: "WildFin: An In-the-Wild Video Dataset from Underwater Ecology Pipelines",
 	description:"",
-	selected: false,
-	authors: ["A. Grassick", "J. T. Hsu", "E. Lin", "Z. Liu", "M. Whitton", "M. Hair", "L. Gutierrez", "H. Yu", "K. Branson", 
+	selected: true,
+	authors: ["A. Grassick*", "J. T. Hsu*", "E. Lin*", "Z. Liu", "M. Whitton", "M. Hair", "L. Gutierrez", "H. Yu", "K. Branson", 
 	"V. Jayaraman", "M. A. Gil", "A. M. Hein", "J. J. Sun"],
-    venue: "In Submission to ECCV Workshop",
+	awards: ["Oral"],
+	image: "/images/publication-figures/wildfin.png",
+	imageAlt: "WildFin Figure 1",
+    venue: "Workshop on Marine Vision @ ECCV",
     year: "2026",
     links: [
       { label: "Coming Soon!", href: "#" }
@@ -77,6 +82,8 @@ const publications = [
 	selected: true, 
     authors: ["X. Wang", "K. A. Horstmann", "E. Lin", "J. Chen", 
 	"A. R. Farhang", "S. Stiles", "A. Sehgal", "J. Light", "D. Van Valen", "Y. Yue", "J. J. Sun"],
+	image: "/images/publication-figures/simple_agents.png",
+	imageAlt: "Simple Agents Figure 1",
     venue: "CVPR",
     year: "2026",
     links: [{ label: "Paper", href: "https://arxiv.org/abs/2512.06006" },
@@ -87,6 +94,8 @@ const publications = [
   {
     title: "Beyond Accuracy: Metrics that Uncover what Makes a 'Good' Visual Descriptor",
 	selected: true,
+	image: "/images/publication-figures/beyond_accuracy.png",
+	imageAlt: "Beyond Accuracy Figure 1",
 	awards: ["Best Poster Award"],
 	description:"",
     authors: ["E. Lin", "L. Zhao", "A. Sehgal", "J. J. Sun"],
@@ -209,19 +218,19 @@ const awards = [
 		  )}
 		</div>
 	  
-		<div id="publications-list">
+		<div id="publications-list" class="publications-list">
 			{publications.map((pub) => (
 			  <div
 				class:list={[
-				  "overflow-hidden transition-all duration-500 ease-in-out",
-				  pub.selected
-					? "mb-2 max-h-[1000px] translate-y-0 opacity-100"
-					: "mb-0 max-h-0 -translate-y-2 opacity-0 pointer-events-none",
+				  "publication-item",
+				  pub.selected ? "is-open" : "is-collapsed",
 				]}
 				data-publication
 				data-selected={pub.selected ? "true" : "false"}
 			  >
-				<ResearchCard {...pub} />
+				<div class="publication-item-inner">
+				  <ResearchCard {...pub} />
+				</div>
 			  </div>
 			))}
 		  </div>
@@ -240,16 +249,8 @@ const awards = [
 			const isSelected = item.getAttribute("data-selected") === "true";
 			if (isSelected) return;
 	  
-			item.classList.toggle("mb-0", !expanded);
-			item.classList.toggle("max-h-0", !expanded);
-			item.classList.toggle("-translate-y-2", !expanded);
-			item.classList.toggle("opacity-0", !expanded);
-			item.classList.toggle("pointer-events-none", !expanded);
-	  
-			item.classList.toggle("mb-2", expanded);
-			item.classList.toggle("max-h-[1000px]", expanded);
-			item.classList.toggle("translate-y-0", expanded);
-			item.classList.toggle("opacity-100", expanded);
+			item.classList.toggle("is-open", expanded);
+			item.classList.toggle("is-collapsed", !expanded);
 		  });
 	  
 		  button.textContent = expanded
